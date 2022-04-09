@@ -34,22 +34,23 @@ int main()
 			scanf("%lf", &a);
 			printf("Введите второе число b:\n");
 			scanf("%lf", &b);
-			i = a - b;
-			d = a + b;
-			f = a * b;
-			g = a / b;
+
 			switch (c)
 			{
 			case '+':
+				d = a + b;
 				printf("Результат:%lf", d);
 				break;
 			case'-':
+				i = a - b;
 				printf("Результат:%lf", i);
 				break;
 			case'/':
+				g = a / b;
 				printf("Результат:%lf", g);
 				break;
 			case'*':
+				f = a * b;
 				printf("Результат:%lf", f);
 				break;
 			case'^':
