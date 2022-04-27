@@ -1,10 +1,9 @@
-﻿//Автор Татьяна Хромина
+//Автор Татьяна Хромина
 //Лицензия GNU GPL
 //Код калькулятора
 //Калькулятор способен считать со знаками после запятой
-//Оперций в калькуляторе 6:
-//степень,факториал,сумма,разность,деление,умножение#define _CRT_SECURE_NO_WARNINGS
-
+//Оперций в калькуляторе 9:
+//степень,факториал,сумма,разность,деление,умножение,векторное сложение и разность,склярное произведение веторов.
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
@@ -15,10 +14,10 @@ int main()
 {
 	system("chcp 1251");
 
-	double a, b, d, i, f, g, e, h, w;
+	double a, b, d, i, f, g, e, h, w;//Вводим переменные для работы с арифметическими операциями
 	int k, m, j;
 	char c, s, v, o;
-	float *x,*y,*res;
+	float* x, * y, * res;//Вводим переменные для работы с векторами
 	int size;
 	do
 	{
@@ -34,14 +33,14 @@ int main()
 				scanf(" %d", &k);
 				m = 1;
 
-				for (int j = 1; j <= k; j++)
+				for (int j = 1; j <= k; j++)//Считаем факториал
 				{
 					m = m * j;
 				}
 
 				printf("Результат:%d", m);
 			}
-			else if (c != '!')
+			else if (c != '!')//Считаем все остальные виды операций
 			{
 				printf("Введите первое число a:\n");
 				scanf("%lf", &a);
@@ -50,56 +49,88 @@ int main()
 
 				switch (c)
 				{
-				case '+':
+				case '+'://Считаем сложение
 					d = a + b;
 					printf("Результат:%lf", d);
 					break;
-				case'-':
+				case'-'://Считаем разность
 					i = a - b;
 					printf("Результат:%lf", i);
 					break;
-				case'/':
+				case'/'://Считаем деление
 					g = a / b;
 					printf("Результат:%lf", g);
 					break;
-				case'*':
+				case'*'://Считаем умножение
 					f = a * b;
 					printf("Результат:%lf", f);
 					break;
-				case'^':
+				case'^'://Считаем степень
 					w = pow(a, b);
 					printf("Результат:%lf", w);
 					break;
 				}
 			}
 		}
-		else if (v == '2')
+		else if (v == '2')//Если пользователь хочет работать с векторами
 		{
 			printf("Введите размер векторов: ");
 			scanf(" %i", &size);
 			printf("Введите операцию(+,-,*(скалярное произведение): ");
 			scanf(" %c", &o);
-			if (o == '+')
+			if (o == '+')//Считаем сумму
 			{
-				x=malloc(size*sizeof(int));
-				y=malloc(size*sizeof(int));
-				res=malloc(size * sizeof(int));
+				x = malloc(size * sizeof(int));//Выделяем память
+				y = malloc(size * sizeof(int));
+				res = malloc(size * sizeof(int));
 				printf("Введите первый вектор: ");
-				for (int i = 0; i <size; i++) scanf("%f", &x[i]);
+				for (int i = 0; i < size; i++) scanf("%f", &x[i]);
 				printf("Введите второй вектор: ");
 				for (int i = 0; i < size; i++) scanf("%f", &y[i]);
 				printf("Результат: ");
-				for (int i = 0; i < size; i++) scanf("%f ",x[i]+y[i]);
+				for (int i = 0; i < size; i++) printf("%f ", x[i] + y[i]);//Выполняем операцию
 				printf("\n");
-				free(x);
+				free(x);//Очищаем память
+				free(y);
+				free(res);
+			}
+			else if (o == '*')
+			{
+				x = malloc(size * sizeof(int));//Выделяем память
+				y = malloc(size * sizeof(int));
+				res = malloc(size * sizeof(int));
+				printf("Введите первый вектор: ");
+				for (int i = 0; i < size; i++) scanf("%f", &x[i]);
+				printf("Введите второй вектор: ");
+				for (int i = 0; i < size; i++) scanf("%f", &y[i]);
+				printf("Результат: ");
+				for (int i = 0; i < size; i++) printf("%f ", x[i] * y[i]);//Выполняем операцию
+				printf("\n");
+				free(x);//Очищаем память
+				free(y);
+				free(res);
+			}
+			else if (o == '-')
+			{
+				x = malloc(size * sizeof(int));//Выделяем память
+				y = malloc(size * sizeof(int));
+				res = malloc(size * sizeof(int));
+				printf("Введите первый вектор: ");
+				for (int i = 0; i < size; i++) scanf("%f", &x[i]);
+				printf("Введите второй вектор: ");
+				for (int i = 0; i < size; i++) scanf("%f", &y[i]);
+				printf("Результат: ");
+				for (int i = 0; i < size; i++) printf("%f ", x[i] - y[i]);//Выполняем операцию
+				printf("\n");
+				free(x);//Очищаем память
 				free(y);
 				free(res);
 			}
 
 		}
 		printf("\nПродолжить?Если да введите любую букву кроме n,если нет введите n:");
-		scanf(" %c", &s);
-	} while (s != 'n');
+		scanf(" \n%c", &s);
+	} while (s != 'n');//Заканчиваем цикл,если пользователь вводит букву n
 	return 0;
 }
 
